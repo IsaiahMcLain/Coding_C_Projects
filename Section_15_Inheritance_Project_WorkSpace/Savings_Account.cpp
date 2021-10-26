@@ -17,9 +17,15 @@ bool Savings_Account::deposit(double amount) {
     return Account::deposit(amount); 
 }
 
-//Same as other overloaded operators but formatted to be used for Savings_Account
-std::ostream &operator<<(std::ostream &os, const Savings_Account &sacc) {
-    os << "[Savings_Account: " << sacc.acc_name << ": " << sacc.acc_balance << ": " << sacc.interest_rate
+//Virtual function that uses accounts withdraw function as no additional changes needed to this function
+bool Savings_Account::withdraw(double amount) {
+    return Account::withdraw(amount); 
+}
+
+//Same idea as Account overriden print function but formated for Savings_Account
+void Savings_Account::print(std::ostream &os) const {
+    os.precision(2);
+    os << std::fixed; 
+    os << "[Savings_Account: " << acc_name << ": " << acc_balance << ": " << interest_rate
     << "%]"; 
-    return os; 
 }

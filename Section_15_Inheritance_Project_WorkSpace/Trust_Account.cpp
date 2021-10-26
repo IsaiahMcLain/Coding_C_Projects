@@ -30,10 +30,11 @@ bool Trust_Account::withdraw(double amount) {
     }
 }
 
-//Works like other overloaded stream operators in previous classes
-std::ostream &operator<<(std::ostream &os, const Trust_Account &tacc) {
-    os << "[Trust_Account: " << tacc.acc_name << ": " << tacc.acc_balance << 
-    ": " << "Withdrawls left: " << tacc.withdraw_lim << ": " << "Bonus if deposit is over 5000$ is: " 
-    << tacc.account_dep_bonus << "$]"; 
-    return os; 
+//Same idea as Account overriden print function but formated for Trust_Account
+void Trust_Account::print(std::ostream &os) const {
+    os.precision(2);
+    os << std::fixed; 
+    os << "[Trust_Account: " << acc_name << ": " << acc_balance << 
+    ": " << "Withdrawls left: " << withdraw_lim << ": " << "Bonus if deposit is over 5000$ is: " 
+    << account_dep_bonus << "$]"; 
 }

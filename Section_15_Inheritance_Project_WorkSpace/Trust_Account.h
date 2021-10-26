@@ -5,8 +5,6 @@
 //Trust accounts give bonus to user if they deposit over a certain amount and only allows 3 withdrawals. 
  
 class Trust_Account : public Savings_Account {
-     friend std::ostream &operator<<(std::ostream &os, const Trust_Account &account);
-     
 private: 
     //Static variables for the class 
     static constexpr const char *set_tacc_name = "Unnamed Trust Account"; 
@@ -27,10 +25,14 @@ public:
     double account_dep_bonus = set_bonus); 
     
     //Deposit method is edited and therfore needs to be redeclared 
-    bool deposit(double amount);
+    virtual bool deposit(double amount) override;
     //Withdraw method is edited as well 
-    bool withdraw(double amount); 
+    virtual bool withdraw(double amount) override; 
     
+    virtual void print(std::ostream &os) const override;  
+    
+    //Virtual Destructor 
+    virtual ~Trust_Account() = default; 
 }; 
 
 #endif //_TRUST_ACCOUNT_H_

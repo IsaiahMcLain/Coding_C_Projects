@@ -5,8 +5,6 @@
 //Savings_Accounts are child class of Account, difference is that savings accounts have an interest rate which
 //is added on to any deposit a user makes 
 class Savings_Account: public Account{
-    friend std::ostream &operator<<(std::ostream &os, const Savings_Account &account);
-    
 private:
     //Static variables for the class 
     static constexpr const char *set_sacc_name = "Unnamed Savings Account"; 
@@ -23,7 +21,13 @@ public:
     double interest_rate = set_sacc_int); 
    
     //Method (while inherited we are changing it to have it add the interest rate to the deposit amount) 
-    bool deposit(double amount); 
+    virtual bool deposit(double amount) override; 
+    virtual bool withdraw(double amount) override; 
+    
+    virtual void print(std::ostream &os) const override;  
+    
+    //Virtual Destructor 
+    virtual ~Savings_Account() = default; 
 };
 
 #endif //_SAVINGS_ACCOUNT_H_

@@ -1,12 +1,11 @@
 #ifndef _ACCOUNT_H_
 #define _ACCOUNT_H_
+#include "i_printable.h"
 #include <iostream> 
 #include <string> 
 
-//Highest class in the inheritance hierarchy, while out of scope of this project I would make this class 
-//an abstract class which all the other classes are based off of. 
-class Account {
-    friend std::ostream &operator<<(std::ostream &os, const Account &account); 
+//Highest class in the inheritance hierarchy, is an abstract base class for other accounts
+class Account: public I_Printable {
 private:
     //Static variables for the Class 
     static constexpr const char *set_acc_name = "Unnamed Account"; 
@@ -22,9 +21,13 @@ public:
     Account(std::string acc_name = set_acc_name, double acc_balance = set_acc_bal);
     
     //Methods
-    bool deposit(double amount);
-    bool withdraw(double amount); 
-    double get_balance() const; 
+    virtual bool deposit(double amount) = 0;
+    virtual  bool withdraw(double amount) = 0; 
+    //New abstract interface implementaion of print function
+    virtual void print(std::ostream &os) const override;  
+    
+    //Virtual Destructor 
+    virtual ~Account() = default; 
     
 };
 

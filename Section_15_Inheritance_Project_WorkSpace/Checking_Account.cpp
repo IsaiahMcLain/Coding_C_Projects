@@ -16,9 +16,16 @@ bool Checking_Account::withdraw(double amount) {
     }
 }
 
-//Works like previous overloaded operators but is formated to Checking_Account 
-std::ostream &operator<<(std::ostream &os, const Checking_Account &cacc) {
-    os << "[Checking_Account: " << cacc.acc_name << ": " << cacc.acc_balance << 
-    ": " << "Withdrawl fee: " << cacc.withdraw_trans <<"$]"; 
-    return os; 
+//Uses Accounts withdrawal method and therefore the function is declared virtual here as well as no changes 
+//are made to this function
+bool Checking_Account::deposit(double amount) { //Virtual function 
+    return Account::deposit(amount); //Calls upon deposit method in Account 
+}
+
+//Same idea as Account overriden print function but formated for Checking_Account
+void Checking_Account::print(std::ostream &os) const {
+    os.precision(2);
+    os << std::fixed; 
+    os << "[Checking_Account: " << acc_name << ": " << acc_balance << 
+    ": " << "Withdrawl fee: " << withdraw_trans <<"$]"; 
 }
